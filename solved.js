@@ -21,15 +21,27 @@ module.exports = function() {
   }
 
   // Use the "solution(xx)" function to return data for testing.
-  var solution = function (input) {
-    const MAX_IDX = input;
-    var outputArray = [-1, input]; 
+  var solution = function (stockPrices) {
+    const NET_PROFIT_KEY = 0, BUY_PRICE_KEY = 1, SELL_PRICE_KEY = 2;
+    var outputArray = [0, 0, 0]; 
+    var lowestPriceIndex = 0, highestPriceIndex = 0, lowestPrice = Math.max, highestPrice = Math.min
 
-    return outputArray
+    for(var i=0; i<stockPrices.length; i++) {
+
+      console.log(`LOWEST PRICE:  ${stockPrices[lowestPriceIndex]},  HIGHEST PRICE: ${stockPrices[highestPriceIndex]}`);
+      
+      if ( stockPrices[i] < stockPrices[lowestPriceIndex] ) { lowestPriceIndex = i }
+      if ( stockPrices[i] > stockPrices[highestPriceIndex] ) { highestPriceIndex = i }
+
+    }
+
+    outputArray[NET_PROFIT_KEY] = stockPrices[highestPriceIndex] - stockPrices[lowestPriceIndex];
+    outputArray[BUY_PRICE_KEY]  = stockPrices[lowestPriceIndex];
+    outputArray[SELL_PRICE_KEY] = stockPrices[highestPriceIndex];
+
+    return outputArray;
   }
 
-  var retVal = solution(args);
 
-
-  return retVal;
+  return solution(args[0]);
 }
